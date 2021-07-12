@@ -20,7 +20,34 @@
 </head>
 
 <body data-spy="scroll" data-target="#navbarNav" data-offset="50">
+<?php
 
+include 'db.php';
+
+if(isset($_POST['submit'])){
+    $cfname = mysqli_real_escape_string($con, $_POST['cf-name']);
+    $cfemail = mysqli_real_escape_string($con, $_POST['cf-email']);
+    $cfcomm = mysqli_real_escape_string($con, $_POST['cf-messgae']);
+
+    $insertquery = "INSERT INTO review (cfname, cfemail, cfmessgae) VALUES ('$cfname','$cfemail','$cfcomm')";
+
+            if(mysqli_query($con, $insertquery)){
+                ?>
+                <script>
+                    alert("Inserted successful");
+                </script>
+                <?php
+            }else{
+                ?>
+                <script>
+                    alert("No Inserted");
+                </script>
+                <?php
+            }
+
+}
+
+?>
 
     <!---Top Bar
     <section id="topbar" class=" d-lg-block  ">
@@ -535,7 +562,7 @@
     </section>
 
 
-
+    
 
     <!-- COntact us starts-->
     <section class="contact section" id="contact">
@@ -547,7 +574,7 @@
                         Feel Free to ask anything
                     </h2>
 
-                    <form action="#" method="post" class="contact-form webform" data-aos-delay="400" data-aos="fade-up"
+                    <form action="<?php $_PHP_SELF ?>" method="POST" class="contact-form webform" data-aos-delay="400" data-aos="fade-up"
                         role="form">
 
 
@@ -1096,6 +1123,7 @@ India
 
 
 
+    
 
 
 
